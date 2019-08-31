@@ -45,7 +45,7 @@
       </v-menu>
     </v-app-bar>
     <v-content>
-      <v-container fluid>
+      <v-container>
         <nuxt />
       </v-container>
     </v-content>
