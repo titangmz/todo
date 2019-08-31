@@ -27,9 +27,26 @@
 
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+      <v-menu
+        left
+        bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+            v-for="option of options"
+            :key="option"
+            @click="() => {option.action()}"
+          >
+            <v-list-item-title>{{ option.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -38,7 +55,7 @@
     </v-content>
 
     <v-footer :fixed="fixed" app>
-      <span>&copy; NOTODO 2019</span>
+      <span>&copy; DODO 2019</span>
     </v-footer>
   </v-app>
 </template>
@@ -49,6 +66,22 @@ export default {
     return {
       drawer: false,
       fixed: false,
+      options:[
+        {
+          icon: "mdi-apps",
+          title: "Welcome",
+          action:function(){
+            alert(`${this.title}`)
+          }
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Inspire",
+          action:function(){
+            alert(`${this.title}`)
+          }
+        }
+      ],
       items: [
         {
           icon: "mdi-apps",
@@ -63,7 +96,7 @@ export default {
       ],
       right: true,
       rightDrawer: false,
-      title: "TODO"
+      title: "Dodo"
     };
   }
 };

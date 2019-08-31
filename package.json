@@ -1,7 +1,7 @@
 {
-  "name": "todo",
+  "name": "dodo",
   "version": "1.0.0",
-  "description": "My stellar Nuxt.js project",
+  "description": "keep your dodos",
   "author": "Pedram Parsa",
   "private": true,
   "scripts": {
