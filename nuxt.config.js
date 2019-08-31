@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+
   mode: 'spa',
   /*
   ** Headers of the page
@@ -29,6 +30,13 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
+
+
+ server: {
+  host: '0.0.0.0',
+  port: 3000
+},
+
   plugins: [
   ],
   /*

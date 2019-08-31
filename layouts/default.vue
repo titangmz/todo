@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <v-system-bar color="pink darken-2"></v-system-bar>
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
@@ -13,16 +14,11 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
-      color="#fcb69f"
+      color="indigo"
       dark
-      shrink-on-scroll
-      src="https://picsum.photos/1920/1080?random"
-      scroll-target="#scrolling-techniques-2"
       app
     >
-      <template v-slot:img="{ props }">
-        <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
-      </template>
+
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
       <v-toolbar-title v-text="title" />
@@ -39,8 +35,8 @@
 
         <v-list>
           <v-list-item
-            v-for="option of options"
-            :key="option"
+            v-for="(option,i) in options"
+            :key="i"
             @click="() => {option.action()}"
           >
             <v-list-item-title>{{ option.title }}</v-list-item-title>
