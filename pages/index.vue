@@ -1,8 +1,12 @@
 <template>
-  <v-layout >
-    <v-flex xs12 sm8 md3>
-      <Sticky v-for="(note,i) in notes" :key="i" v-bind:title="note.title" v-bind:content="note.content" v-bind:date="note.date" />
+  <v-layout>
+    <v-row>
+      <v-col>
+        <v-flex xs12 sm8 md3>
+      <Sticky class="ma-3 pa-3" v-for="(note,i) in notes" :key="i" v-bind:title="note.title" v-bind:content="note.content" v-bind:date="note.date" />
     </v-flex>
+      </v-col>
+    </v-row>
   </v-layout>
 </template>
 
@@ -16,19 +20,19 @@ export default {
     return {
         notes:[
           {
-            title:'Task',
-            content:'Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.',
+            title:'Task1',
+            content:'Task 1 content',
             date:'Saturday, August 31, 2019'
           },
           {
-            title:'Taskyy',
-            content:'Thank you for developing with Vuetify',
-            date:'Saturday, August 31'
+            title:'Important',
+            content:'YOOOOOOOOOOOO',
+            date:'Tuesday, June 22'
           },
           {
             title:'Task',
-            content:'Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.',
-            date:'Saturday, August 31, 2019'
+            content:'Yay',
+            date:'Saturday, August 2, 2019'
           }
         ]
     };

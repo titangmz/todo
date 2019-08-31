@@ -45,14 +45,11 @@
       </v-menu>
     </v-app-bar>
     <v-content>
-      <v-container>
+      <v-container fluid>
         <nuxt />
       </v-container>
     </v-content>
 
-    <v-footer :fixed="fixed" app>
-      <span>&copy; DODO 2019</span>
-    </v-footer>
   </v-app>
 </template>
 
