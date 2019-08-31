@@ -1,6 +1,6 @@
 # todo
 
-> My splendiferous Nuxt.js project
+> My stellar Nuxt.js project
 
 ## Build Setup
 
