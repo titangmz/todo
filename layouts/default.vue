@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-system-bar color="pink darken-2"></v-system-bar>
-    <v-navigation-drawer v-model="drawer" fixed app>
+    <v-navigation-drawer v-if="navigation" v-model="drawer" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
@@ -14,12 +14,14 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
-      color="indigo"
+      color="purple darken-2"
       dark
       app
     >
 
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon v-if="navigation" @click.stop="drawer = !drawer" />
+      <v-icon class="pl-10 pr-3">mdi-note</v-icon>
+
 
       <v-toolbar-title v-text="title" />
       <v-spacer />
@@ -57,19 +59,20 @@
 export default {
   data() {
     return {
+      navigation:false,
       drawer: false,
       fixed: false,
       options:[
         {
           icon: "mdi-apps",
-          title: "Welcome",
+          title: "Username",
           action:function(){
             alert(`${this.title}`)
           }
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
+          icon: "mdi-logout",
+          title: "Signout",
           action:function(){
             alert(`${this.title}`)
           }

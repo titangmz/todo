@@ -1,11 +1,28 @@
 <template>
-  <v-container fluid>
+  <v-card class="mx-auto pa-5" max-width="1000" flat>
+    <v-toolbar flat>
+      <v-text-field @keyup.enter="newNote(tempNote)" v-model="tempNote" label="Task" hide-details  clearable ></v-text-field>
+    
+
+      <v-btn  @click="newNote(tempNote)" icon>
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </v-toolbar>
+
+
+    <v-container fluid>
       <v-row align="center" justify="center">
-       
-          <Sticky  class="ma-3 pa-3 flex-grow-1" v-for="(note,i) in notes" :key="i" v-bind:title="note.title" v-bind:content="note.content" v-bind:date="note.date" />
-      
+        <Sticky
+          class="ma-3 pa-3 flex-grow-1"
+          v-for="(note,i) in notes"
+          :key="i"
+          v-bind:title="note.title"
+          v-bind:content="note.content"
+          v-bind:date="note.date"
+        />
       </v-row>
-  </v-container>
+    </v-container>
+  </v-card>
 </template>
 
 
@@ -17,29 +34,45 @@ export default {
   },
   data() {
     return {
-        notes:[
-          {
-            title:'Task1',
-            content:'Task 1 content',
-            date:'Saturday, August 31, 2019'
-          },
-          {
-            title:'Task1',
-            content:'Task 1 content',
-            date:'Saturday, August 31, 2019'
-          },
-          {
-            title:'Important',
-            content:'YOOOOOOOOOOOOYOOOOOOOOOOOOYOOOOOOOOOOOOYOOOOOOOOOOOOYOOOOOOOOOOOO',
-            date:'Tuesday, June 22'
-          },
-          {
-            title:'Task',
-            content:'Yay',
-            date:'Saturday, August 2, 2019'
-          }
-        ]
+      tempNote:'',
+      notes: [
+        {
+          title: "Test note",
+          date: "Saturday, August 31, 2019"
+        },
+        {
+          title: "New tast is coming",
+          date: "Saturday, August 31, 2019"
+        },
+        {
+          title: "YOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLO",
+          date: "Saturday, August 2, 2019"
+        },
+        {
+          title: "from",
+          date: "Saturday, August 2, 2019"
+        }
+        
+      ]
     };
+  },
+  methods:{
+    getDateString: function(){
+        const date = new Date()
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const res = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+        return res
+    },
+    newNote: function(txt){
+        const note = {
+          title : txt,
+          date : this.getDateString()
+        }
+        this.notes.unshift(note)
+    },
   }
+
+
 };
 </script>

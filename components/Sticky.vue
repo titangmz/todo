@@ -1,10 +1,7 @@
 <template>
-  <v-card   min-width="250">
+  <v-card max-width="500" width="250">
     <v-card-title>{{title}}</v-card-title>
     <v-card-text>
-      <p>{{content}}</p>
-
-      
       <hr class="my-3" />
       <div class="text-xs-right">
         <em>
@@ -21,7 +18,6 @@
         name:'Sticky',
         props:{
             title : String,
-            content : String,
             date : String
         }
     }
