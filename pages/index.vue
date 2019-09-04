@@ -12,13 +12,20 @@
 
     <v-container fluid>
       <v-row align="center" justify="center">
+        <v-card v-if="notes.length==0?true:false" max-width="500" class="pa-8" width="250" outlined>
+          <v-card-text>
+             Task box is empty
+          </v-card-text>
+        </v-card>
         <Sticky
           class="ma-3 pa-3 flex-grow-1"
           v-for="(note,i) in notes"
           :key="i"
+          v-bind:id="note.id"
           v-bind:title="note.title"
           v-bind:content="note.content"
           v-bind:date="note.date"
+          v-on:remove-sticky="removeSticky"
         />
       </v-row>
     </v-container>
@@ -35,24 +42,8 @@ export default {
   data() {
     return {
       tempNote:'',
+      lastId:0,
       notes: [
-        {
-          title: "Test note",
-          date: "Saturday, August 31, 2019"
-        },
-        {
-          title: "New tast is coming",
-          date: "Saturday, August 31, 2019"
-        },
-        {
-          title: "YOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLOYOLO",
-          date: "Saturday, August 2, 2019"
-        },
-        {
-          title: "from",
-          date: "Saturday, August 2, 2019"
-        }
-        
       ]
     };
   },
@@ -67,12 +58,39 @@ export default {
     newNote: function(txt){
         const note = {
           title : txt,
-          date : this.getDateString()
+          date : this.getDateString(),
+          id : this.lastId + 1
         }
-        this.notes.unshift(note)
-    },
-  }
+        if(txt !== ""){
+          this.notes.unshift(note)
+          this.lastId ++
+          this.tempNote = "";
+        }
 
+        
+        this.setLSSticky()
+        this.getLSSticky()
+        
+    },
+    removeSticky : function(id){
+        const tempNotes = this.notes.filter((index)=>index.id!=id)
+        this.notes = tempNotes
+        this.setLSSticky()
+        this.getLSSticky()
+    },
+    getLSSticky : function(){
+      if(localStorage.notes){
+        this.notes = JSON.parse(localStorage.notes)
+      }
+    },
+    setLSSticky : function(){
+      localStorage.setItem('notes',JSON.stringify(this.notes))
+    }
+
+  },
+  mounted(){
+    this.getLSSticky()
+  },
 
 };
 </script>
