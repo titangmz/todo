@@ -79,10 +79,13 @@ export default {
     },
     getLSSticky : function(){
       if(localStorage.notes){
+        this.lastId = Number(localStorage.lastId)
+
         this.notes = JSON.parse(localStorage.notes)
       }
     },
     setLSSticky : function(){
+      localStorage.setItem('lastId' , this.lastId)
       localStorage.setItem('notes',JSON.stringify(this.notes))
     }
 
