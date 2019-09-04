@@ -72,8 +72,9 @@ export default {
         },
         {
           icon: "mdi-logout",
-          title: "Signout",
+          title: "ClearLocalStorage",
           action:function(){
+            localStorage.clear()
             alert(`${this.title}`)
           }
         }
