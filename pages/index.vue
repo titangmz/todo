@@ -5,7 +5,7 @@
     
 
       <v-btn  @click="newNote(tempNote)" icon>
-        <v-icon>mdi-plus</v-icon>
+        <v-icon>mdi-plus-box</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -17,7 +17,7 @@
              Task box is empty
           </v-card-text>
         </v-card>
-        <Sticky
+        <Note
           class="ma-3 pa-3 flex-grow-1"
           v-for="(note,i) in notes"
           :key="i"
@@ -25,7 +25,9 @@
           v-bind:title="note.title"
           v-bind:content="note.content"
           v-bind:date="note.date"
-          v-on:remove-sticky="removeSticky"
+          v-bind:pinned="note.pinned"
+          v-on:remove-Note="removeNote"
+          v-on:update-Note="setNote"
         />
       </v-row>
     </v-container>
@@ -34,10 +36,10 @@
 
 
 <script>
-import Sticky from "@/components/Sticky";
+import Note from "@/components/Note";
 export default {
   components: {
-    Sticky
+    Note
   },
   data() {
     return {
@@ -57,6 +59,7 @@ export default {
     },
     newNote: function(txt){
         const note = {
+          pinned : false,
           title : txt,
           date : this.getDateString(),
           id : this.lastId + 1
@@ -66,32 +69,49 @@ export default {
           this.lastId ++
           this.tempNote = "";
         }
-        this.updateSticky()
+        this.updateNotes()
     },
-    removeSticky : function(id){
+    removeNote : function(id){
         const tempNotes = this.notes.filter((index)=>index.id!=id)
         this.notes = tempNotes
-        this.updateSticky()
+        this.updateNotes()
     },
-    updateSticky : function(){
-        this.setLSSticky()
-        this.getLSSticky()
+    updateNotes : function(){
+        this.setLSNote()
+        this.getLSNote()
     },
-    getLSSticky : function(){
+    getLSNote : function(){
       if(localStorage.notes){
         this.lastId = Number(localStorage.lastId)
-
         this.notes = JSON.parse(localStorage.notes)
       }
     },
-    setLSSticky : function(){
+    setLSNote : function(){
       localStorage.setItem('lastId' , this.lastId)
       localStorage.setItem('notes',JSON.stringify(this.notes))
-    }
+    },
+    setNote : function(id,note){
+        const tempNote = this.notes.find((index)=>{
+            return index.id === id
+        })
+        if(note.id !== undefined){
+          tempNote.id = note.id
+        }
+        if(note.date !== undefined){
+          tempNote.date = note.date
+        }
+        if(note.title !== undefined){
+          tempNote.title = note.title
+        }
+        if(note.pinned !== undefined){
+          tempNote.pinned = note.pinned
+        }
+        this.updateNotes()
+    },
 
   },
   mounted(){
-    this.getLSSticky()
+    this.getLSNote()
   },
 
 };

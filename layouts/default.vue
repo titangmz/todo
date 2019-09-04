@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar color="pink darken-2"></v-system-bar>
+    <v-system-bar color="a"></v-system-bar>
     <v-navigation-drawer v-if="navigation" v-model="drawer" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
@@ -14,13 +14,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
-      color="purple darken-2"
+      color="indigo"
       dark
       app
     >
 
       <v-app-bar-nav-icon v-if="navigation" @click.stop="drawer = !drawer" />
-      <v-icon class="pl-10 pr-3">mdi-note</v-icon>
+      <v-icon class="pl-10 pr-3">mdi-file-word-box</v-icon>
 
 
       <v-toolbar-title v-text="title" />
