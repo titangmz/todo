@@ -5,7 +5,7 @@
     
 
       <v-btn  @click="newNote(tempNote)" icon>
-        <v-icon>mdi-plus-box</v-icon>
+        <v-icon color="indigo lighten-1">mdi-plus-box</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -54,7 +54,7 @@ export default {
         const date = new Date()
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        const res = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+        const res = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
         return res
     },
     newNote: function(txt){
@@ -68,8 +68,9 @@ export default {
           this.notes.unshift(note)
           this.lastId ++
           this.tempNote = "";
+          this.updateNotes()
         }
-        this.updateNotes()
+        
     },
     removeNote : function(id){
         const tempNotes = this.notes.filter((index)=>index.id!=id)

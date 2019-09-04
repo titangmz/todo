@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar color="a"></v-system-bar>
+    <v-system-bar color="indigo"></v-system-bar>
     <v-navigation-drawer v-if="navigation" v-model="drawer" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
