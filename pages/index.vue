@@ -66,15 +66,14 @@ export default {
           this.lastId ++
           this.tempNote = "";
         }
-
-        
-        this.setLSSticky()
-        this.getLSSticky()
-        
+        this.updateSticky()
     },
     removeSticky : function(id){
         const tempNotes = this.notes.filter((index)=>index.id!=id)
         this.notes = tempNotes
+        this.updateSticky()
+    },
+    updateSticky : function(){
         this.setLSSticky()
         this.getLSSticky()
     },
